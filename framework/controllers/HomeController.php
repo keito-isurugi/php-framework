@@ -1,4 +1,5 @@
 <?php
+use eftec\bladeone\BladeOne;
 
 class HomeController extends Controller
 {
@@ -8,7 +9,12 @@ class HomeController extends Controller
                     ->where('email', 'test@test.com')
                     ->first();
 
-        var_dump($user);
+        $views = '/var/www/framework/views';
+        $cache = '/var/www/framework/cache';   
+        $blade = new BladeOne($views, $cache, BladeOne::MODE_DEBUG); 
+        echo $blade->run("hello", array("variable1" => "value1", "user" => $user));
+
+
         /* object(User)#10 (4) { 
             ["id"]=> int(1)
             ["name"]=> string(9) "TEST USER"
